@@ -11,8 +11,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
   </ItemGroup>
 
+<<<<<<< HEAD
   <ItemGroup>
     <ProjectReference Include="..\Project2.Core\Project2.Core.csproj" />
   </ItemGroup>
 
+=======
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
 </Project>

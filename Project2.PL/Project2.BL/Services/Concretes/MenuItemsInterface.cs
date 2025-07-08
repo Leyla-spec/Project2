@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using Project2.BL.Services.Interfaces;
 using Project2.Core.Entities;
 using Project2.DAL.Contexts;
@@ -57,3 +58,17 @@ namespace Project2.BL.Services.Concretes
         }
     }
 }
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project2.BL.Services.Concretes
+{
+    internal class MenuItemsInterface
+    {
+    }
+}
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef

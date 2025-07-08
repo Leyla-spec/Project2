@@ -961,6 +961,7 @@
             "rid": "win"
           }
         }
+<<<<<<< HEAD
       },
       "Project2.Core/1.0.0": {
         "type": "project",
@@ -990,6 +991,8 @@
         "runtime": {
           "bin/placeholder/Project2.PL.dll": {}
         }
+=======
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
       }
     }
   },
@@ -2681,6 +2684,7 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+<<<<<<< HEAD
     },
     "Project2.Core/1.0.0": {
       "type": "project",
@@ -2691,13 +2695,19 @@
       "type": "project",
       "path": "../Project2.PL/Project2.PL.csproj",
       "msbuildProject": "../Project2.PL/Project2.PL.csproj"
+=======
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.EntityFrameworkCore >= 8.0.0",
+<<<<<<< HEAD
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.0",
       "Project2.Core >= 1.0.0"
+=======
+      "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.0"
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
     ]
   },
   "packageFolders": {

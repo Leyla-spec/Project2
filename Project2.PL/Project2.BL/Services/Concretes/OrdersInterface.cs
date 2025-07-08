@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using Microsoft.EntityFrameworkCore;
 using Project2.BL.Services.Interfaces;
 using Project2.Core.Entities;
@@ -89,3 +90,17 @@ namespace Project2.BL.Services.Concretes
         }
     }
 }
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project2.BL.Services.Concretes
+{
+    internal class OrdersInterface
+    {
+    }
+}
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef

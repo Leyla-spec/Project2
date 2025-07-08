@@ -962,6 +962,23 @@
           }
         }
       },
+<<<<<<< HEAD
+=======
+      "Project2.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Project2.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Project2.DAL.dll": {}
+        }
+      },
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
       "Project2.PL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -2667,6 +2684,14 @@
         "useSharedDesignerContext.txt"
       ]
     },
+<<<<<<< HEAD
+=======
+    "Project2.DAL/1.0.0": {
+      "type": "project",
+      "path": "../Project2.DAL/Project2.DAL.csproj",
+      "msbuildProject": "../Project2.DAL/Project2.DAL.csproj"
+    },
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
     "Project2.PL/1.0.0": {
       "type": "project",
       "path": "../Project2.PL/Project2.PL.csproj",
@@ -2677,6 +2702,10 @@
     "net8.0": [
       "Microsoft.EntityFrameworkCore >= 8.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.0",
+<<<<<<< HEAD
+=======
+      "Project2.DAL >= 1.0.0",
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
       "Project2.PL >= 1.0.0"
     ]
   },
@@ -2713,6 +2742,12 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
+=======
+            "C:\\Users\\leylasa\\Source\\Repos\\Project2\\Project2.PL\\Project2.DAL\\Project2.DAL.csproj": {
+              "projectPath": "C:\\Users\\leylasa\\Source\\Repos\\Project2\\Project2.PL\\Project2.DAL\\Project2.DAL.csproj"
+            },
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
             "C:\\Users\\leylasa\\Source\\Repos\\Project2\\Project2.PL\\Project2.PL\\Project2.PL.csproj": {
               "projectPath": "C:\\Users\\leylasa\\Source\\Repos\\Project2\\Project2.PL\\Project2.PL\\Project2.PL.csproj"
             }

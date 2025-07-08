@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Project2.Core.Entities;
@@ -20,3 +21,17 @@ namespace Project2.DAL.Configurations
         }
     }
 }
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project2.DAL.Configurations
+{
+    internal class OrderConfiguration
+    {
+    }
+}
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef

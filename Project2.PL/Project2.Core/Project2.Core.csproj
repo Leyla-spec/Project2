@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <ProjectReference Include="..\Project2.DAL\Project2.DAL.csproj" />
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
     <ProjectReference Include="..\Project2.PL\Project2.PL.csproj" />
   </ItemGroup>
 

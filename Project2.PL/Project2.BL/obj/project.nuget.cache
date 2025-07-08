@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "Bqf5YKWYnn4=",
+=======
+  "dgSpecHash": "dOd5WqzM1Vc=",
+>>>>>>> 704c33f55dcbb2ed9b5e5db5e52a593e8ce259ef
   "success": true,
   "projectFilePath": "C:\\Users\\leylasa\\Source\\Repos\\Project2\\Project2.PL\\Project2.BL\\Project2.BL.csproj",
   "expectedPackageFiles": [
