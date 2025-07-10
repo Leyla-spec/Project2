@@ -1,0 +1,17 @@
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\bin\Debug\net8.0\Project2.DAL.deps.json
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\bin\Debug\net8.0\Project2.DAL.dll
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\bin\Debug\net8.0\Project2.DAL.pdb
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\bin\Debug\net8.0\Project2.Core.dll
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\bin\Debug\net8.0\Project2.Core.pdb
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.csproj.AssemblyReference.cache
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.AssemblyInfoInputs.cache
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.AssemblyInfo.cs
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.300B2FFB.Up2Date
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.dll
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\refint\Project2.DAL.dll
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.pdb
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\ref\Project2.DAL.dll
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\bin\Debug\net8.0\Project2.DAL.runtimeconfig.json
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.genruntimeconfig.cache
