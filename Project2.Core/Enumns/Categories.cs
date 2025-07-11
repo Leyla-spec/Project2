@@ -2,10 +2,10 @@
 {
     public enum Categories
     {
-        None,
-        Soup,
-        Meal ,
-        Dessert ,
-        Drink 
+        Əlavə,
+        Şorba,
+        ƏsasYemək ,
+        Şirniyyat ,
+        İçki 
     }
 }

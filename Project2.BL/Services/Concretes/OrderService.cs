@@ -15,12 +15,12 @@ namespace Project2.BL.Services.Concretes
         public void AddOrder(Orders order)
         {
             if (order == null)
-                throw new ArgumentNullException("Order cannot be null.");
-            var orders = _context.Orders
-                .Include(o => o.OrderItem)
-                .ThenInclude(oi => oi.MenuItem);
+                throw new ArgumentNullException(nameof(order), "Order cannot be null.");
+
             _context.Orders.Add(order);
+            _context.SaveChanges();
         }
+
 
         public void DeleteOrder(int? id)
         {
@@ -37,13 +37,10 @@ namespace Project2.BL.Services.Concretes
 
         public List<Orders> GetAllOrders()
         {
-            var orders = _context.Orders
-                .Include(o => o.OrderItem)
-                .ThenInclude(oi => oi.MenuItem)
-                .ToList();
-            if (orders == null || !orders.Any())
-                throw new KeyNotFoundException("No orders found.");
-            return orders;
+            return _context.Orders
+                           .Include(o => o.OrderItem)
+                           .ThenInclude(oi => oi.MenuItem)
+                           .ToList();  
         }
 
         public List<Orders> GetOrderByDate(DateTime dateTime)

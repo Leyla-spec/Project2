@@ -15,3 +15,4 @@ C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.
 C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\ref\Project2.DAL.dll
 C:\Users\HP\source\repos\Project2.PL\Project2.DAL\bin\Debug\net8.0\Project2.DAL.runtimeconfig.json
 C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.genruntimeconfig.cache
+C:\Users\HP\source\repos\Project2.PL\Project2.DAL\obj\Debug\net8.0\Project2.DAL.sourcelink.json

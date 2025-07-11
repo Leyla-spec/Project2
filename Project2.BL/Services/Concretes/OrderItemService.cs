@@ -15,7 +15,7 @@ namespace Project2.BL.Services.Concretes
         {
             if (orderItem == null)
                 throw new ArgumentNullException(nameof(orderItem), "Order item cannot be null.");
-            if (_context.OrderItem.Any(o => o.MenuItem.Id == orderItem.MenuItem.Id && o.Count == orderItem.Count))
+            if (_context.OrderItem.Any(o => o.MenuItemId == orderItem.MenuItemId && o.Count == orderItem.Count))
                 throw new ArgumentException("Order item with the same menu item and count already exists.");
             _context.OrderItem.Add(orderItem);
             _context.SaveChanges();

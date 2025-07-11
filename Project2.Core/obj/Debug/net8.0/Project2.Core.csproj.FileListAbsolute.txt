@@ -12,3 +12,4 @@ C:\Users\HP\source\repos\Project2.PL\Project2.Core\obj\Debug\net8.0\Project2.Cor
 C:\Users\HP\source\repos\Project2.PL\Project2.Core\obj\Debug\net8.0\ref\Project2.Core.dll
 C:\Users\HP\source\repos\Project2.PL\Project2.Core\bin\Debug\net8.0\Project2.Core.runtimeconfig.json
 C:\Users\HP\source\repos\Project2.PL\Project2.Core\obj\Debug\net8.0\Project2.Core.genruntimeconfig.cache
+C:\Users\HP\source\repos\Project2.PL\Project2.Core\obj\Debug\net8.0\Project2.Core.sourcelink.json
