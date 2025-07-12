@@ -208,115 +208,113 @@ void OrderOperations()
                 Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
             }
         }
-    
-          else if (secim == "4")
-    {
-        Console.Write("Başlanğıc tarix (yyyy-MM-dd): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime start))
-        {
-            Console.WriteLine("Düzgün tarix daxil edin.");
-            continue;
-        }
 
-        Console.Write("Son tarix (yyyy-MM-dd): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime end))
+        else if (secim == "4")
         {
-            Console.WriteLine("Düzgün tarix daxil edin.");
-            continue;
-        }
+            Console.Write("Başlanğıc tarix (yyyy-MM-dd): ");
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime start))
+            {
+                Console.WriteLine("Düzgün başlanğıc tarixi daxil edin.");
+                continue;
+            }
 
-        var filteredOrders = orderService.GetOrdersByDatesInterval(start, end);
-        if (filteredOrders.Count == 0)
-        {
-            Console.WriteLine("Bu tarixlər aralığında sifariş tapılmadı.");
-            continue;
-        }
+            Console.Write("Son tarix (yyyy-MM-dd): ");
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime end))
+            {
+                Console.WriteLine("Düzgün son tarixi daxil edin.");
+                continue;
+            }
 
-        foreach (var o in filteredOrders)
-        {
-            Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
-        }
-    }
-    else if (secim == "5")
-    {
-        Console.Write("Minimum məbləğ: ");
-        if (!decimal.TryParse(Console.ReadLine(), out decimal min))
-        {
-            Console.WriteLine("Düzgün məbləğ daxil edin.");
-            continue;
-        }
-
-         Console.Write("Maksimum məbləğ: ");
-        if (!decimal.TryParse(Console.ReadLine(), out decimal max))
-        {
-            Console.WriteLine("Düzgün məbləğ daxil edin.");
-            continue;
-        }
-
-        var filteredOrders = orderService.GetOrdersByPriceInterval(min, max);
-        if (filteredOrders.Count == 0)
-        {
-            Console.WriteLine("Bu məbləğ aralığında sifariş tapılmadı.");
-            continue;
-        }
-
-        foreach (var o in filteredOrders)
-        {
-            Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
-        }
-    }
-    else if (secim == "6")
-    {
-        Console.Write("Tarix (yyyy-MM-dd): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime date))
-        {
-            Console.WriteLine("Düzgün tarix daxil edin.");
-            continue;
-        }
-
-        var filteredOrders = orderService.GetOrderByDate(date);
-        if (filteredOrders.Count == 0)
-        {
-            Console.WriteLine("Bu tarixdə sifariş tapılmadı.");
-            continue;
-        }
-
-        foreach (var o in filteredOrders)
-        {
-            Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
-        }
-    }
-    else if (secim == "7")
-    {
-        Console.Write("Sifariş ID: ");
-        if (int.TryParse(Console.ReadLine(), out int id))
-        {
             try
             {
-                var o = orderService.GetOrderById(id);
-                Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
-                foreach (var i in o.OrderItem)
-                {
-                    Console.WriteLine($"\t{i.MenuItem.Name} - {i.Count} ədəd");
-                }
+                var orders = orderService.GetOrdersByDatesInterval(start, end);
+                foreach (var o in orders)
+                    Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Xəta: {ex.Message}");
+                Console.WriteLine(ex.Message);
             }
+        }
+        else if (secim == "5")
+        {
+            Console.Write("Başlanğıc məbləğ: ");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal startPrice))
+            {
+                Console.WriteLine("Düzgün məbləğ daxil edin.");
+                continue;
+            }
+
+            Console.Write("Son məbləğ: ");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal endPrice))
+            {
+                Console.WriteLine("Düzgün məbləğ daxil edin.");
+                continue;
+            }
+            try
+            {
+                var orders = orderService.GetOrdersByPriceInterval( startPrice, endPrice);
+                foreach (var o in orders)
+                    Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+        else if (secim == "6")
+        {
+            Console.Write("Tarix (yyyy-MM-dd): ");
+            if (!DateTime.TryParse(Console.ReadLine(), out DateTime date))
+            {
+                Console.WriteLine("Düzgün tarix daxil edin.");
+                continue;
+            }
+
+            try
+            {
+                var ordersByDate = orderService.GetOrderByDate(date);
+
+                foreach (var o in ordersByDate)
+                    Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
+            }
+            catch (KeyNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        else if (secim == "7")
+        {
+            Console.Write("Sifariş ID: ");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                try
+                {
+                    var o = orderService.GetOrderById(id);
+                    Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
+                    foreach (var i in o.OrderItem)
+                    {
+                        Console.WriteLine($"\t{i.MenuItem.Name} - {i.Count} ədəd");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Xəta: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Düzgün ID daxil edin.");
+            }
+        }
+        else if (secim == "0")
+        {
+            break;
         }
         else
         {
-            Console.WriteLine("Düzgün ID daxil edin.");
+            Console.WriteLine("Yanlış seçim, zəhmət olmasa düzgün seçim edin.");
         }
     }
-    else if (secim == "0")
-    {
-        break;
-    }
-    else
-    {
-        Console.WriteLine("Yanlış seçim, zəhmət olmasa düzgün seçim edin.");
-    }
-}
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Project2.BL.Exceptions
+﻿namespace Project2.BL.Exceptions
 {
-    internal class DuplicateMenuItemException
+    public class DuplicateMenuItemException : Exception
     {
+        public DuplicateMenuItemException()
+        { }
+        public DuplicateMenuItemException(string message)
+            : base(message)
+        { }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Project2.BL.Services.Interfaces;
+﻿using Project2.BL.Exceptions;
+using Project2.BL.Services.Interfaces;
 using Project2.Core.Entities;
 using Project2.DAL.Contexts;
 
@@ -14,9 +15,9 @@ namespace Project2.BL.Services.Concretes
         public void AddOrderItem(OrderItem orderItem)
         {
             if (orderItem == null)
-                throw new ArgumentNullException(nameof(orderItem), "Order item cannot be null.");
+                throw new ArgumentNullException(nameof(orderItem), "Order item null ola bilməz");
             if (_context.OrderItem.Any(o => o.MenuItemId == orderItem.MenuItemId && o.Count == orderItem.Count))
-                throw new ArgumentException("Order item with the same menu item and count already exists.");
+                throw new DuplicateMenuItemException("Eyni menu item və saylı order item artıq mövcuddur");
             _context.OrderItem.Add(orderItem);
             _context.SaveChanges();
         }
@@ -24,10 +25,10 @@ namespace Project2.BL.Services.Concretes
         public void DeleteOrderItem(int? orderItemId)
         {
             if (orderItemId is null || orderItemId <= 0)
-                throw new ArgumentException("Order item ID must be greater than zero.");
+                throw new ArgumentException("Order item id-si 0-dan böyük olmnalıdır.");
             var orderItem = GetOrderItemById(orderItemId);
             if (orderItem == null)
-                throw new KeyNotFoundException($"Order item with ID not found.");
+                throw new OrderNotFoundException($"Bu id ilə uyğun order item tapılmadı");
             _context.OrderItem.Remove(orderItem);
             _context.SaveChanges();
         }
@@ -36,27 +37,27 @@ namespace Project2.BL.Services.Concretes
         {
             var orderItems = _context.OrderItem.ToList();
             if (orderItems == null || !orderItems.Any())
-                throw new KeyNotFoundException("No order items found.");
+                throw new OrderNotFoundException("Order item tapılmadı.");
             return orderItems;
         }
 
         public OrderItem GetOrderItemById(int? orderItemId)
         {
             if (orderItemId is null)
-                throw new ArgumentException("Order item ID must be greater than zero.", nameof(orderItemId));
+                throw new ArgumentNullException("Order item id-si 0-dan böyük olmnalıdır.", nameof(orderItemId));
             var orderItem = _context.OrderItem.SingleOrDefault(o => o.Id == orderItemId);
             if (orderItem == null)
-                throw new KeyNotFoundException($"Order item with ID {orderItemId} not found.");
+                throw new OrderNotFoundException($"Id {orderItemId} ilə uyğun order item tapılmadı.");
             return orderItem;
         }
 
         public void UpdateOrderItem(OrderItem orderItem)
         {
             if (orderItem == null)
-                throw new ArgumentNullException(nameof(orderItem), "Order item cannot be null.");
+                throw new ArgumentNullException(nameof(orderItem), "Order item null ola bilməz.");
             var existingOrderItem = GetOrderItemById(orderItem.Id);
             if (existingOrderItem == null)
-                throw new KeyNotFoundException($"Order item with ID {orderItem.Id} not found.");
+                throw new OrderNotFoundException($"Id {orderItem.Id} ilə uyğun order item tapılmadı..");
             existingOrderItem.MenuItem = orderItem.MenuItem;
             existingOrderItem.Count = orderItem.Count;
             _context.SaveChanges();
