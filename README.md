@@ -7,20 +7,21 @@ Verilənlər Entity Framework Core vasitəsilə SQL Server LocalDB-də saxlanıl
 
 ## Layihə strukturu
 
-Project2.sln
-├── Project2.Core # Entity-lər və Enum-lar
-│ ├── Entities # Məlumat modelləri
-│ └── Enums # Kateqoriyalar (Categories)
-├── Project2.DAL # Verilənlər bazası girişi (DbContext, Migration və s.)
-│ ├── Contexts
-│ ├── Configurations
-│ └── Migrations
-├── Project2.BL # Biznes məntiq
-│ ├── Exceptions
-│ └── Services
-│ ├── Interfaces
-│ └── Concretes
-└── Project2.PL # Konsol interfeysi (Program.cs)
+Project2.sln  
+├── Project2.Core (Entity-lər və Enum-lar)  
+│   ├── Entities (Məlumat modelləri)  
+│   └── Enums (Kateqoriyalar - Categories)  
+├── Project2.DAL (Verilənlər bazası girişi: DbContext, Migration və s.)  
+│   ├── Contexts  
+│   ├── Configurations  
+│   └── Migrations  
+├── Project2.BL (Biznes məntiq)  
+│   ├── Exceptions  
+│   └── Services  
+│       ├── Interfaces  
+│       └── Concretes  
+└── Project2.PL (Konsol interfeysi - Program.cs)  
+
 
 
 | Layer | Təyinat | Asılılıq |
