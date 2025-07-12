@@ -162,7 +162,9 @@ Bu menyu quruluşu restoranın menyu və sifariş idarəsini asanlaşdırır.
 ## Müəllif
 
 **Ad**: Leyla Əliyeva
+
 **GitHub**: \(https://github.com/Leyla-spec)
+
 **Dil**: C# (.NET 8.0)
 
 ---
