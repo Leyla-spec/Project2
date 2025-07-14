@@ -8,33 +8,40 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 MenuItemService menuService = new();
 OrderService orderService = new();
 
-while (true)
+bool isRunning = true;
+while (isRunning)
 {
+    Console.Clear();
     Console.WriteLine("\n=== Əsas Menu ===");
     Console.WriteLine("1. Menu üzərində əməliyyat aparmaq");
     Console.WriteLine("2. Sifarişlər üzərində əməliyyat aparmaq");
     Console.WriteLine("0. Çıxış");
     Console.Write("Seçim edin: ");
-    string? secim = Console.ReadLine();
 
-    if (secim == "1")
+    switch (Console.ReadLine())
     {
-        MenuOperations();
-    }
-    else if (secim == "2")
-    {
-        OrderOperations();
-    }
-    else if (secim == "0")
-    {
-        break;
+        case "1":
+            MenuOperations();                           
+            break;
+        case "2":
+            OrderOperations();
+            break;
+        case "0":
+            isRunning = false;
+            break;
+        default:
+            Console.WriteLine("Yanlış seçim!");
+            Thread.Sleep(1000);
+            break;
     }
 }
 
 void MenuOperations()
 {
-    while (true)
+    bool back = false;
+    while (!back)
     {
+        Console.Clear();
         Console.WriteLine("\n--- Menu Əməliyyatları ---");
         Console.WriteLine("1. Yeni item əlavə et");
         Console.WriteLine("2. Item üzərində düzəliş et");
@@ -42,10 +49,34 @@ void MenuOperations()
         Console.WriteLine("4. Bütün item-ları göstər");
         Console.WriteLine("0. Əvvəlki menyuya qayıt");
         Console.Write("Seçim edin: ");
-        string? secim = Console.ReadLine();
-
-        if (secim == "1")
+        switch (Console.ReadLine())
         {
+            case "1":
+                AddItem();
+                break;
+            case "2":
+                EditItem();
+                break;
+            case "3":
+                DeleteItem();
+                break;
+            case "4":
+                ListItems();
+                break;
+            case "0":
+                back = true;
+                break;
+            default:
+                Console.WriteLine("Yanlış seçim!");
+                Thread.Sleep(1000);
+                Console.ReadKey();
+                break;
+        }
+
+        void AddItem()
+        {
+            Console.Clear();
+
             Console.Write("Ad: ");
             string? name = Console.ReadLine();
             Console.Write("Qiymət: ");
@@ -62,46 +93,59 @@ void MenuOperations()
             {
                 Console.WriteLine("Düzgün kateqoriya daxil edilməyib.");
             }
-        }
-        else if (secim == "2")
-        {
-            Console.Write("Item ID: ");
-            int id = int.Parse(Console.ReadLine());
-            Console.Write("Yeni ad: ");
-            string? name = Console.ReadLine();
-            Console.Write("Yeni qiymət: ");
-            decimal price = decimal.Parse(Console.ReadLine());
 
-            var menu = menuService.GetMenuById(id);
-            menu.Name = name;
-            menu.Price = price;
+            Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+            Console.ReadKey();
+        }
+    }
+    void EditItem()
+    {
+        Console.Clear();
+        Console.Write("Item ID: ");
+        int id = int.Parse(Console.ReadLine());
+        Console.Write("Yeni ad: ");
+        string? name = Console.ReadLine();
+        Console.Write("Yeni qiymət: ");
+        decimal price = decimal.Parse(Console.ReadLine());
 
-            menuService.UpdateMenuItem(menu);
-            Console.WriteLine("Düzəliş edildi.");
-        }
-        else if (secim == "3")
-        {
-            Console.Write("Silinəcək item ID: ");
-            int id = int.Parse(Console.ReadLine());
-            menuService.DeleteMenuItem(id);
-            Console.WriteLine("Silindi.");
-        }
-        else if (secim == "4")
-        {
-            foreach (var item in menuService.GetAll())
-                Console.WriteLine($"{item.Id} - {item.Name} - {item.Category} - {item.Price} AZN");
-        }
-        else if (secim == "0")
-        {
-            break;
-        }
+        var menu = menuService.GetMenuById(id);
+        menu.Name = name;
+        menu.Price = price;
+
+        menuService.UpdateMenuItem(menu);
+        Console.WriteLine("Düzəliş edildi.");
+
+        Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+        Console.ReadKey();
+    }
+    void DeleteItem()
+    {
+        Console.Clear();
+        Console.Write("Silinəcək item ID: ");
+        int id = int.Parse(Console.ReadLine());
+        menuService.DeleteMenuItem(id);
+        Console.WriteLine("Silindi.");
+
+        Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+        Console.ReadKey();
+    }
+    void ListItems()
+    {
+        Console.Clear();
+        foreach (var item in menuService.GetAll())
+            Console.WriteLine($"{item.Id} - {item.Name} - {item.Category} - {item.Price} AZN");
+
+        Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+        Console.ReadKey();
     }
 }
 
 void OrderOperations()
 {
-    while (true)
+    bool back = false;
+    while (!back)
     {
+        Console.Clear();
         Console.WriteLine("\n--- Sifariş Əməliyyatları ---");
         Console.WriteLine("1. Yeni sifariş əlavə et");
         Console.WriteLine("2. Sifarişi sil");
@@ -112,13 +156,46 @@ void OrderOperations()
         Console.WriteLine("7. Nömrəyə görə sifariş");
         Console.WriteLine("0. Əvvəlki menyuya qayıt");
         Console.Write("Seçim edin: ");
-        string? secim = Console.ReadLine();
 
-        if (secim == "1")
+        switch (Console.ReadLine())
         {
+            case "1":
+                AddOrder();
+                break;
+            case "2":
+                DeleteOrder();
+                break;
+            case "3":
+                ListAllOrders();
+                break;
+            case "4":
+                FilterByDateRange();
+                break;
+            case "5":
+                FilterByPriceRange();
+                break;
+            case "6":
+                FilterByExactDate();
+                break;
+            case "7":
+                GetOrderByNumber();
+                break;
+            case "0":
+                back = true;
+                break;
+            default:
+                Console.WriteLine("Yanlış seçim.");
+                Thread.Sleep(1000);
+                break;
+        }
+
+        void AddOrder()
+        {
+            Console.Clear();
             List<OrderItem> items = new();
             while (true)
             {
+                Console.Clear();
                 Console.Write("Menu ID: ");
                 if (!int.TryParse(Console.ReadLine(), out int menuId))
                 {
@@ -154,7 +231,6 @@ void OrderOperations()
             if (items.Count == 0)
             {
                 Console.WriteLine("Sifariş boşdur, əlavə edilmədi.");
-                continue;
             }
             decimal total = items.Sum(i =>
             {
@@ -170,11 +246,14 @@ void OrderOperations()
             };
 
             orderService.AddOrder(order);
-            Console.WriteLine("Sifariş əlavə edildi.");
+            Console.WriteLine("Sifariş əlavə olundu.");
+            Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+            Console.ReadKey();
         }
 
-        else if (secim == "2")
+        void DeleteOrder()
         {
+            Console.Clear();
             Console.Write("Silinəcək sifariş ID: ");
             if (int.TryParse(Console.ReadLine(), out int id))
             {
@@ -194,35 +273,45 @@ void OrderOperations()
             }
         }
 
-        else if (secim == "3")
+        void ListAllOrders()
         {
+            Console.Clear();
             var orders = orderService.GetAllOrders();
             if (orders.Count == 0)
             {
                 Console.WriteLine("Heç bir sifariş tapılmadı.");
-                continue;
+                return;
             }
 
             foreach (var o in orders)
             {
                 Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
+
+                foreach (var item in o.OrderItem)
+                {
+                    Console.WriteLine($"   {item.MenuItem.Name} - Say: {item.Count}");
+                }
             }
+
+            Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+            Console.ReadKey();
         }
 
-        else if (secim == "4")
+        void FilterByDateRange()
         {
+            Console.Clear();
             Console.Write("Başlanğıc tarix (yyyy-MM-dd): ");
             if (!DateTime.TryParse(Console.ReadLine(), out DateTime start))
             {
                 Console.WriteLine("Düzgün başlanğıc tarixi daxil edin.");
-                continue;
+                return;
             }
 
             Console.Write("Son tarix (yyyy-MM-dd): ");
             if (!DateTime.TryParse(Console.ReadLine(), out DateTime end))
             {
                 Console.WriteLine("Düzgün son tarixi daxil edin.");
-                continue;
+                return;
             }
 
             try
@@ -234,58 +323,72 @@ void OrderOperations()
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+
             }
+            Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+            Console.ReadKey();
         }
-        else if (secim == "5")
+
+        void FilterByPriceRange()
         {
-            Console.Write("Başlanğıc məbləğ: ");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal startPrice))
+            Console.Clear();
+            Console.Write("Minimum məbləğ: ");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal min))
             {
                 Console.WriteLine("Düzgün məbləğ daxil edin.");
-                continue;
+                return;
             }
 
-            Console.Write("Son məbləğ: ");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal endPrice))
+            Console.Write("Maksimum məbləğ: ");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal max))
             {
                 Console.WriteLine("Düzgün məbləğ daxil edin.");
-                continue;
-            }
-            try
-            {
-                var orders = orderService.GetOrdersByPriceInterval( startPrice, endPrice);
-                foreach (var o in orders)
-                    Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                return;
             }
 
+            var filteredOrders = orderService.GetOrdersByPriceInterval(min, max);
+            if (filteredOrders.Count == 0)
+            {
+                Console.WriteLine("Bu məbləğ aralığında sifariş tapılmadı.");
+                return;
+            }
+
+            foreach (var o in filteredOrders)
+            {
+                Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
+            }
+            Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+            Console.ReadKey();
         }
-        else if (secim == "6")
+
+        void FilterByExactDate()
         {
+            Console.Clear();
             Console.Write("Tarix (yyyy-MM-dd): ");
             if (!DateTime.TryParse(Console.ReadLine(), out DateTime date))
             {
                 Console.WriteLine("Düzgün tarix daxil edin.");
-                continue;
+                return;
             }
 
-            try
+            var filteredOrders = orderService.GetOrderByDate(date);
+            if (filteredOrders.Count == 0)
             {
-                var ordersByDate = orderService.GetOrderByDate(date);
+                Console.WriteLine("Bu tarixdə sifariş tapılmadı.");
+                return;
+            }
 
-                foreach (var o in ordersByDate)
-                    Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
-            }
-            catch (KeyNotFoundException ex)
+            foreach (var o in filteredOrders)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"{o.Id} - {o.TotalPrice} AZN - {o.OrderItem.Sum(i => i.Count)} məhsul - {o.OrderDate}");
             }
+            Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+            Console.ReadKey();
         }
-        else if (secim == "7")
+
+        void GetOrderByNumber()
         {
+            Console.Clear();
             Console.Write("Sifariş ID: ");
             if (int.TryParse(Console.ReadLine(), out int id))
             {
@@ -307,14 +410,9 @@ void OrderOperations()
             {
                 Console.WriteLine("Düzgün ID daxil edin.");
             }
-        }
-        else if (secim == "0")
-        {
-            break;
-        }
-        else
-        {
-            Console.WriteLine("Yanlış seçim, zəhmət olmasa düzgün seçim edin.");
+            Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
+            Console.ReadKey();
         }
     }
 }
+
