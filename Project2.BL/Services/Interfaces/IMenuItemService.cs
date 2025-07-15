@@ -4,11 +4,12 @@ namespace Project2.BL.Services.Interfaces
 {
     public interface IMenuItemService
     {
-        public void AddMenuItem(MenuItem menuItem);
-        public void DeleteMenuItem(int? menuId);
-        public List<MenuItem> GetAll();
-        public MenuItem GetMenuById(int? menuId);
-        public void UpdateMenuItem(MenuItem menuItem);
+        Task AddMenuItemAsync(MenuItem menuItem);
+        Task DeleteAsync(int? id);
+        Task<List<MenuItem>> GetAllAsync();
+        Task<MenuItem?> GetByIdAsync(int menuId, bool isTracking = false);
+        Task UpdateMenuItemAsync(MenuItem menuItem);
+        Task SaveChangesAsync();
 
     }
 }

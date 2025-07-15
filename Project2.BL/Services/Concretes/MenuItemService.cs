@@ -1,59 +1,72 @@
-﻿using Project2.BL.Exceptions;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Project2.BL.Exceptions;
 using Project2.BL.Services.Interfaces;
 using Project2.Core.Entities;
 using Project2.DAL.Contexts;
+using Project2.DAL.Repositories.Conceretes;
+using Project2.DAL.Repositories.Interfaces;
 
 namespace Project2.BL.Services.Concretes
 {
     public class MenuItemService : IMenuItemService
     {
-        private readonly MenuAndOrderDbContext _context;
-        public MenuItemService()
+        private readonly Repositories<MenuItem> _context;
+        public MenuItemService(MenuAndOrderDbContext context)
         {
-            _context = new MenuAndOrderDbContext();
+            _context = new Repositories<MenuItem>(context);
         }
-        public void AddMenuItem(MenuItem menuItem)
+
+        public async Task AddMenuItemAsync(MenuItem menuItem)
         {
-            if (_context.MenuItem.Any(m => m.Name == menuItem.Name))
+            var allItems = await _context.GetAllAsync();
+            if (allItems.Any(m => m.Name == menuItem.Name))
                 throw new DuplicateMenuItemException("Bu adla menu item artıq mövcuddur.");
-            _context.MenuItem.Add(menuItem);
-            _context.SaveChanges();
+
+            await _context.AddAsync(menuItem);
         }
 
-        public void DeleteMenuItem(int? menuId)
+        public async Task DeleteAsync(int? id)
         {
-            if (menuId == null)
-                throw new ArgumentNullException("Menu ID null ola bilməz.");
-            var menuItem = GetMenuById(menuId);
-            if (menuItem == null)
-                throw new KeyNotFoundException($"ID {menuId} ilə uyğun menu item tapılmadı.");
-            _context.MenuItem.Remove(menuItem);
-            _context.SaveChanges();
+            if (id == null)
+                throw new ArgumentNullException(nameof(id), "ID null ola bilməz.");
+
+            var entity = await _context.GetByIdAsync(id.Value);
+            if (entity == null)
+                throw new KeyNotFoundException($"ID {id} ilə uyğun entiti tapılmadı.");
+
+            await _context.DeleteAsync(id);
         }
 
-        public List<MenuItem> GetAll() => _context.MenuItem.ToList();
-
-        public MenuItem GetMenuById(int? menuId)
+        public async Task<List<MenuItem>> GetAllAsync()
         {
-            if (menuId == null)
-                throw new ArgumentNullException(nameof(menuId), "Menu ID null ola bilməz.");
-            var menu = _context.MenuItem.SingleOrDefault(m => m.Id == menuId);
+            return await _context.GetAllAsync();
+        }
+
+        public async Task<MenuItem?> GetByIdAsync(int menuId, bool isTracking = false)
+        {
+            var menu = await _context.GetByIdAsync(menuId, isTracking);
             if (menu == null)
-                throw new KeyNotFoundException($"ID { menuId } ilə uyğun menu item tapılmadı.");
+                throw new KeyNotFoundException($"ID {menuId} ilə uyğun menu item tapılmadı.");
+
             return menu;
         }
 
-        public void UpdateMenuItem(MenuItem menuItem)
+        public async Task UpdateMenuItemAsync(MenuItem menuItem)
         {
             if (menuItem == null)
                 throw new ArgumentNullException(nameof(menuItem), "Menu item null ola bilməz.");
-            var existingMenuItem = GetMenuById(menuItem.Id);
+
+            var existingMenuItem = await _context.GetByIdAsync(menuItem.Id);
             if (existingMenuItem == null)
-                throw new KeyNotFoundException($"ID { menuItem.Id } ilə uyğun menu item tapılmadı.");
-            existingMenuItem.Name = menuItem.Name;
-            existingMenuItem.Price = menuItem.Price;
-            existingMenuItem.Category = menuItem.Category;
-            _context.SaveChanges();
+                throw new KeyNotFoundException($"ID {menuItem.Id} ilə uyğun menu item tapılmadı.");
+
+            await _context.UpdateAsync(menuItem);
         }
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
     }
+
 }

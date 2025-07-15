@@ -1,3 +1,9 @@
+C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.csproj.AssemblyReference.cache
+C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.AssemblyInfoInputs.cache
+C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.AssemblyInfo.cs
+C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.sourcelink.json
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\bin\Debug\net8.0\Project2.PL.exe
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\bin\Debug\net8.0\Project2.PL.deps.json
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\bin\Debug\net8.0\Project2.PL.runtimeconfig.json
@@ -123,15 +129,9 @@ C:\Users\HP\source\repos\Project2.PL\Project2.PL\bin\Debug\net8.0\Project2.DAL.d
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\bin\Debug\net8.0\Project2.BL.pdb
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\bin\Debug\net8.0\Project2.Core.pdb
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\bin\Debug\net8.0\Project2.DAL.pdb
-C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.csproj.AssemblyReference.cache
-C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.AssemblyInfoInputs.cache
-C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.AssemblyInfo.cs
-C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.csproj.CoreCompileInputs.cache
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.5C0C3E8C.Up2Date
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.dll
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\refint\Project2.PL.dll
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.pdb
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.genruntimeconfig.cache
 C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\ref\Project2.PL.dll
-C:\Users\HP\source\repos\Project2.PL\Project2.PL\obj\Debug\net8.0\Project2.PL.sourcelink.json

@@ -2,65 +2,73 @@
 using Project2.BL.Services.Interfaces;
 using Project2.Core.Entities;
 using Project2.DAL.Contexts;
+using Project2.DAL.Repositories.Conceretes;
 
 namespace Project2.BL.Services.Concretes
 {
-    public class OrderItemService : IOrderItemService
+    public class OrderItemService : IOrderItemService 
     {
-        private readonly MenuAndOrderDbContext _context;
-        public OrderItemService()
+        private readonly Repositories<OrderItem> _repository;
+        public OrderItemService(MenuAndOrderDbContext context)
         {
-            _context = new MenuAndOrderDbContext();
+            _repository = new Repositories<OrderItem>(context);
         }
-        public void AddOrderItem(OrderItem orderItem)
+
+        public async Task AddOrderItemAsync(OrderItem orderItem)
         {
             if (orderItem == null)
                 throw new ArgumentNullException(nameof(orderItem), "Order item null ola bilməz");
-            if (_context.OrderItem.Any(o => o.MenuItemId == orderItem.MenuItemId && o.Count == orderItem.Count))
+
+            var allItems = await _repository.GetAllAsync();
+            if (allItems.Any(o => o.MenuItemId == orderItem.MenuItemId && o.Count == orderItem.Count))
                 throw new DuplicateMenuItemException("Eyni menu item və saylı order item artıq mövcuddur");
-            _context.OrderItem.Add(orderItem);
-            _context.SaveChanges();
+
+            await _repository.AddAsync(orderItem);
         }
 
-        public void DeleteOrderItem(int? orderItemId)
+        public async Task DeleteOrderItemAsync(int? orderItemId)
         {
             if (orderItemId is null || orderItemId <= 0)
-                throw new ArgumentException("Order item id-si 0-dan böyük olmnalıdır.");
-            var orderItem = GetOrderItemById(orderItemId);
+                throw new ArgumentException("Order item id-si 0-dan böyük olmalıdır.");
+
+            var orderItem = await _repository.GetByIdAsync(orderItemId.Value);
             if (orderItem == null)
                 throw new OrderNotFoundException($"Bu id ilə uyğun order item tapılmadı");
-            _context.OrderItem.Remove(orderItem);
-            _context.SaveChanges();
+
+            await _repository.DeleteAsync(orderItemId);
         }
 
-        public List<OrderItem> GetAllOrderItems()
+        public async Task<List<OrderItem>> GetAllOrderItemsAsync()
         {
-            var orderItems = _context.OrderItem.ToList();
+            var orderItems = await _repository.GetAllAsync();
             if (orderItems == null || !orderItems.Any())
                 throw new OrderNotFoundException("Order item tapılmadı.");
             return orderItems;
         }
 
-        public OrderItem GetOrderItemById(int? orderItemId)
+        public async Task<OrderItem?> GetOrderItemByIdAsync(int? orderItemId, bool isTracking = false)
         {
+
             if (orderItemId is null)
-                throw new ArgumentNullException("Order item id-si 0-dan böyük olmnalıdır.", nameof(orderItemId));
-            var orderItem = _context.OrderItem.SingleOrDefault(o => o.Id == orderItemId);
+                throw new ArgumentNullException("Order item id-si null ola bilməz", nameof(orderItemId));
+
+            var orderItem = await _repository.GetByIdAsync(orderItemId.Value);
             if (orderItem == null)
                 throw new OrderNotFoundException($"Id {orderItemId} ilə uyğun order item tapılmadı.");
             return orderItem;
         }
 
-        public void UpdateOrderItem(OrderItem orderItem)
+        public async Task UpdateOrderItemAsync(OrderItem orderItem)
         {
             if (orderItem == null)
                 throw new ArgumentNullException(nameof(orderItem), "Order item null ola bilməz.");
-            var existingOrderItem = GetOrderItemById(orderItem.Id);
+
+            var existingOrderItem = await _repository.GetByIdAsync(orderItem.Id);
             if (existingOrderItem == null)
-                throw new OrderNotFoundException($"Id {orderItem.Id} ilə uyğun order item tapılmadı..");
-            existingOrderItem.MenuItem = orderItem.MenuItem;
-            existingOrderItem.Count = orderItem.Count;
-            _context.SaveChanges();
+                throw new OrderNotFoundException($"Id {orderItem.Id} ilə uyğun order item tapılmadı.");
+
+            await _repository.UpdateAsync(orderItem);
         }
     }
+
 }
