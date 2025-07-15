@@ -168,6 +168,7 @@ class Program
                 }
 
                 await menuService.DeleteAsync(id);
+                await menuService.SaveChangesAsync();
 
                 Console.WriteLine("Silindi.");
                 Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
@@ -200,7 +201,6 @@ class Program
                 Console.WriteLine("5. Məbləğ intervalına görə sifarişlər");
                 Console.WriteLine("6. Müəyyən tarixdə olan sifarişlər");
                 Console.WriteLine("7. Nömrəyə görə sifariş");
-                Console.WriteLine("8. Sifarişi redaktə et");
                 Console.WriteLine("0. Əvvəlki menyuya qayıt");
                 Console.Write("Seçim edin: ");
 
@@ -226,9 +226,6 @@ class Program
                         break;
                     case "7":
                         await GetOrderByNumber();
-                        break;
-                    case "8":
-                        await EditOrderAsync();
                         break;
                     case "0":
                         back = true;
@@ -303,6 +300,7 @@ class Program
                 };
 
                 await orderService.AddAsync(order);
+                await orderService.SaveChangesAsync();
                 Console.WriteLine("Sifariş əlavə olundu.");
                 Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
                 Console.ReadKey();
@@ -328,6 +326,7 @@ class Program
                 {
                     Console.WriteLine("Düzgün ID daxil edin.");
                 }
+                await orderService.SaveChangesAsync();
                 Console.ReadKey();
             }
 
@@ -475,47 +474,6 @@ class Program
                 {
                     Console.WriteLine("Düzgün ID daxil edin.");
                 }
-                Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
-                Console.ReadKey();
-            }
-            async Task EditOrderAsync()
-            {
-                Console.Clear();
-                Console.Write("Redaktə etmək istədiyiniz sifariş ID: ");
-                if (!int.TryParse(Console.ReadLine(), out int orderId))
-                {
-                    Console.WriteLine("Düzgün ID daxil edin.");
-                    Console.ReadKey();
-                    return;
-                }
-
-                try
-                {
-                    var order = await orderService.GetByIdAsync(orderId);
-                    if (order == null)
-                    {
-                        Console.WriteLine("Belə bir sifariş tapılmadı.");
-                        Console.ReadKey();
-                        return;
-                    }
-
-                    Console.WriteLine($"Cari tarix: {order.OrderDate:yyyy-MM-dd}");
-                    Console.Write("Yeni tarix (yyyy-MM-dd) daxil edin (və ya boş buraxın): ");
-                    string? dateInput = Console.ReadLine();
-                    if (!string.IsNullOrWhiteSpace(dateInput) && DateTime.TryParse(dateInput, out DateTime newDate))
-                    {
-                        order.OrderDate = newDate;
-                    }
-
-                    await orderService.UpdateAsync(order);
-
-                    Console.WriteLine("Sifariş uğurla yeniləndi.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Xəta: {ex.Message}");
-                }
-
                 Console.WriteLine("← Davam etmək üçün istənilən düyməni bas.");
                 Console.ReadKey();
             }

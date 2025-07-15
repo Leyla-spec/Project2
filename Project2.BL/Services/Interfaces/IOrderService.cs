@@ -8,10 +8,10 @@ namespace Project2.BL.Services.Interfaces
         Task DeleteAsync(int? id);
         Task<List<Orders>> GetAllAsync();
         Task<Orders?> GetByIdAsync(int? id);
-        Task UpdateAsync(Orders entity);
+        Task UpdateAsync(Orders order);
         Task<List<Orders>> GetOrderByDateAsync(DateTime dateTime);
         Task<List<Orders>> GetOrdersByDatesIntervalAsync(DateTime start, DateTime end);
-
+        Task SaveChangesAsync();
     }
 }
 

@@ -29,8 +29,6 @@ namespace Project2.DAL.Repositories.Conceretes
             Table.Remove(await GetByIdAsync(id.Value));
             await SaveChangesAsync();
         }
-
-
         public async Task<List<T>> GetAllAsync()
         {
             var entities = await Table.ToListAsync();
@@ -52,9 +50,20 @@ namespace Project2.DAL.Repositories.Conceretes
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            Table.Update(entity);
+            var trackedEntity = Table.Local.FirstOrDefault(e => e.Id == entity.Id);
+            if (trackedEntity != null)
+            {
+                _context.Entry(trackedEntity).CurrentValues.SetValues(entity);
+            }
+            else
+            {
+                Table.Attach(entity);
+                _context.Entry(entity).State = EntityState.Modified;
+            }
+
             await SaveChangesAsync();
         }
+
 
         public async Task SaveChangesAsync()
         {

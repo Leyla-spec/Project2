@@ -7,7 +7,7 @@ using Project2.DAL.Repositories.Conceretes;
 
 namespace Project2.BL.Services.Concretes
 {
-    public class OrderService : IOrderService
+    public class OrderService : IOrderService 
     { 
         private readonly Repositories<Orders> _repository;
 
@@ -36,8 +36,11 @@ namespace Project2.BL.Services.Concretes
             if (order == null)
                 throw new OrderNotFoundException($"{id} id-li sifariş tapılmadı.");
 
-            await _repository.DeleteAsync(id);
+            _repository.DeleteAsync(id);
+
+            await _repository.SaveChangesAsync();
         }
+
 
         public async Task<List<Orders>> GetAllAsync()
         {
@@ -85,18 +88,7 @@ namespace Project2.BL.Services.Concretes
 
         public async Task UpdateAsync(Orders order)
         {
-            if (order == null)
-                throw new ArgumentNullException(nameof(order), "Sifariş null ola bilməz");
-
-            var existingOrder = await _repository.GetByIdAsync(order.Id);
-            if (existingOrder == null)
-                throw new OrderNotFoundException($"{order.Id} id-li sifariş tapılmadı.");
-
-            existingOrder.OrderDate = order.OrderDate;
-            existingOrder.TotalPrice = order.TotalPrice;
-            existingOrder.OrderItem = order.OrderItem;
-
-            await _repository.UpdateAsync(existingOrder);
+            await _repository.UpdateAsync(order);
         }
 
         public async Task<List<Orders>> GetOrderByDateAsync(DateTime dateTime)
@@ -128,6 +120,11 @@ namespace Project2.BL.Services.Concretes
                 throw new OrderNotFoundException("Bu tarix aralığında sifariş tapılmadı.");
 
             return orders;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
     }
